@@ -8,40 +8,46 @@ const { Node } = require('../extensions/list-tree.js');
 */
 class BinarySearchTree {
   constructor(){
-    this.root = null;
+    this.AllRoot = null;
   }
+
   root() {
-    return this.root
+	console.log(this.AllRoot);
+    return this.AllRoot;
   }
 
   add(data) {
 
-	this.root = addNode(this.root,data)
+	this.AllRoot = addNode(this.AllRoot,data)
+	
     function addNode(node, data) {
-
+		
 		if (!node) return new Node(data);
   
 		if (node.data === data) return node;
   
-		if (data < node.data) {
-		  node.left = addNode(node.left, data);
-		} else {
+		if (data > node.data) {
 		  node.right = addNode(node.right, data);
+		} else {
+		  node.left = addNode(node.left, data);
 		}
   
-		return node;
+		return node
 	  }
   }
 
   has(data) {
-	return this.find(data) ? true: false;
+	let aaa =  this.find(data) ? true: false;
+	console.log(aaa); 
+	// return this.find(data) ? true: false;
+	return aaa;
   }
 
   find(data) {
-	return searchNode(this.root, data);
+
+	return searchNode(this.AllRoot, data);
 
     function searchNode(node, data) {
-
       if (!node) return null;
 
       if (node.data === data) return node;
@@ -55,7 +61,7 @@ class BinarySearchTree {
   }
 
   remove(data) {
-	this.root = removeNode(this.root, data);
+	this.AllRoot = removeNode(this.AllRoot, data);
 
     function removeNode(node, data) {
 
@@ -97,8 +103,8 @@ class BinarySearchTree {
 }
 
   min() {
-    if(!this.root) return null
-	let curr = this.root
+    if(!this.AllRoot) return null
+	let curr = this.AllRoot
 	while(curr.left){
 		curr = curr.left 
 	}
@@ -106,8 +112,8 @@ class BinarySearchTree {
   }
 
   max() {
-    if(!this.root) return null
-	let curr = this.root
+    if(!this.AllRoot) return null
+	let curr = this.AllRoot
 	while(curr.right){
 		curr = curr.right 
 	}
@@ -118,3 +124,15 @@ class BinarySearchTree {
 module.exports = {
   BinarySearchTree
 };
+
+const tree = new BinarySearchTree();
+// tree.add(12);
+// console.log(tree.add(16));
+// console.log(tree.add(1));
+
+// console.log(tree.add(2));
+// console.log(tree.add(3));
+// console.log(tree.add(4));
+// console.log(tree.has(2));
+// console.log(tree.has(3));
+// console.log(tree.root().data);
